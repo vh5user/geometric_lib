@@ -1,3 +1,14 @@
+import math
+
+
+def _validate_dimensions(*values):
+    for value in values:
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            raise TypeError("Arguments must be int or float")
+        if not math.isfinite(value) or value < 0:
+            raise ValueError("Arguments must be finite non-negative numbers")
+
+
 def area(a, b):
     """
     Вычисляет площадь прямоугольника.
@@ -13,6 +24,7 @@ def area(a, b):
         >>> area(4, 5)
         20
     """
+    _validate_dimensions(a, b)
     return a * b
 
 
@@ -31,4 +43,5 @@ def perimeter(a, b):
         >>> perimeter(4, 5)
         18
     """
+    _validate_dimensions(a, b)
     return 2 * (a + b)
